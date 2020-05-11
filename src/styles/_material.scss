@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../assets/fonts/Poppins/Poppins-Regular.ttf') format('opentype');
+}
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+  .mat-toolbar
+  {
+    font-size: 16px !important;
+  }
+
+  .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+  }
+  .mobile_width .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-text  {
+    height: unset !important;
+    line-height: 30px;
+    }
+    .mat-ink-bar{
+      background-color:red;
+  }
+  .mat-tab-label-active{
+       color: #00ADEE !important;
+   }
+   .mobile_width  .mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text{
+    display: block;
+   }
+
+$custom-typography: mat-typography-config(
+    $font-family: 'sans-serif',
+    $headline: mat-typography-level(32px, 48px, 700),
+    $body-1: mat-typography-level(16px, 24px, 500)
+);
+@include angular-material-typography($custom-typography);

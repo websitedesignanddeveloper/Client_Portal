@@ -1,0 +1,18 @@
+<mat-toolbar color="" class="fix-nav">
+    <div class="nav-brand">
+        Client Portal
+    </div>  
+    <form class="hidden-sm" style=" margin-top: 5px;float:right">
+        <div class="col-md-4">
+        <mat-form-field >
+            <input matInput [placeholder]="'Search' | translate">
+        </mat-form-field>
+    </div>
+    </form>
+    <button class="hidden-sm" mat-icon-button [routerLink]="['/profile']">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onLoggedout()">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+</mat-toolbar>

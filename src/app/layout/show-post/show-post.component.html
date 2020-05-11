@@ -1,0 +1,272 @@
+<div class="px-0">
+  <div class="col-12" style="padding-top: 10px;padding-left: 0px;padding-right: 0px;">
+    <div class="px-4 py-5 chat-box bg-white" #scrollMe>
+      <!--new design start-->
+      <div class="media w-50 mb-3">
+        <div class="avatar-circle" fxShow="true" fxHide.lt-md>
+          <span class="initials">FA</span>
+        </div>
+        <div class="media-body ml-3 ">
+          <p class="small text-muted chat-msg-userneme txtdate">Frank Alexander<span class="timeSpan">11:40 - 14 Apr
+              2020 </span> </p>
+          <div class="bg-light rounded py-2  mb-2 px-3 msgTxt profile-pic">
+            <p class="text-small mb-0 text-muted txtinfo">Please upload the following missing documents:
+            </p>
+            <div class="row txtUpload">
+              <div class="col-md-12">
+                <mat-selection-list>
+                  <div>
+                    <span>
+                      <mat-list-option checkboxPosition="before" [selected]="true">
+                        <p class="text-small mb-0 text-muted txtinfo">Upload copy of your certificate 1.<br>
+                          <span class="timeSpan1">Uploaded- 11 April, 12:50</span>
+                        </p>
+                      </mat-list-option>
+                    </span>
+                  </div>
+                </mat-selection-list>
+              </div>
+            </div>
+            <div class="row txtUpload">
+              <div class="col-md-12">
+                <mat-selection-list>
+                  <div>
+                    <span>
+                      <mat-list-option checkboxPosition="before" [selected]="false">
+                        <p class="text-small mb-0 text-muted txtinfo">Upload picture of your driver's license.<br>
+                          <span class="timeSpan1 assignLable">Upload File</span>
+                        </p>
+                      </mat-list-option>
+                    </span>
+                  </div>
+                </mat-selection-list>
+              </div>
+            </div>
+            <a pageScroll href="#btn-input" class="text-to-small mb-0">
+              <span class="material-icons txtinfo">reply
+              </span>
+              Reply
+            </a>
+          </div>
+        </div>
+      </div>
+      <!--new design end-->
+      <div *ngFor="let data1 of jsonArray[2].msgs;let j = index">
+
+        <div class="media w-50 mb-3">
+          <div class="avatar-circle" fxShow="true" fxHide.lt-md>
+            <span class="initials">{{getInitials(data1.FromName)}}</span>
+          </div>
+          <div class="media-body ml-3 ">
+            <p class="small text-muted chat-msg-userneme txtdate">{{data1.FromName}} <span
+                class="timeSpan">{{data1.time}} - {{data1.date}} </span> </p>
+            <div class="bg-light rounded py-2  mb-2 px-3 msgTxt profile-pic">
+              <p class="text-small mb-0 text-muted txtinfo">{{data1.msg}}
+              </p><br>
+              <a pageScroll href="#btn-input" class="text-to-small mb-0" (click)="ReplyToMsg(data1)">
+                <span class="material-icons txtinfo">reply
+                </span>
+                Reply
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Reciever Message-->
+
+        <div *ngIf="data1.reply != undefind || data1.reply != null">
+          <div *ngFor="let data of data1.reply;let i =index;">
+            <div class="media w-50 ml-auto mb-3">
+              <div class="media-body">
+                <div class="chat-msg-userneme">
+                  <p class="small text-muted chat-msg-userneme txtdate">John Rechard
+                    <span class="timeSpan">{{data1.time}}- {{data1.date}}</span> </p>
+                </div>
+                <div class="reply-cls rounded py-2 px-3 mb-2 row">
+                  <div *ngIf="data.docUrl != undefind || data.docUrl != null">
+                    <span class="col-md-2" fxShow="true" fxHide.lt-md>
+                      <a href="{{data.docUrl}}" target="blanck">
+                        <mat-icon>attach_file</mat-icon>
+                      </a>
+                    </span>
+                  </div>
+                  <p class="text-small mb-0 text-muted txtinfo">{{data.reply}} </p>
+                  <div *ngIf="data.docUrl != undefind || data.docUrl != null">
+                    <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{data.docUrl}}" download>
+                        <span class="material-icons downloadIcon">
+                          get_app
+                        </span>
+                      </a></span>
+                  </div>
+                  <div class="editDiv">
+                    <a class="editIcon" (click)="editClick(data,i,j)">
+                      <span class="material-icons">
+                        create
+                      </span>
+                      Edit
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="(posts.length != 0 || posts != null)  ">
+        <div *ngFor="let data of posts;let p = index">
+          <div class="media w-50 ml-auto mb-3" *ngIf="data.case == selectedcase">
+            <div class="media-body">
+              <div class="chat-msg-userneme">
+                <p class="small text-muted chat-msg-userneme txtdate">John Rechard <span class="timeSpan">{{data.time}}-
+                    {{data.date}}</span> </p>
+              </div>
+              <div class="reply-cls rounded py-2 px-3 mb-2 row">
+                <div class="row  col-md-12">
+                  {{ item }}
+                  <p class="text-small mb-0 text-muted txtinfo">{{data.reply}}</p>
+                  <div *ngIf="data.length-1 == i">
+                    <span class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></span>
+                  </div>
+                </div>
+                <div class="row col-md-12" *ngFor="let dataurl of data.docUrl;let i = index">
+                  <div class="mt20" *ngIf="dataurl.url != undefind || dataurl.url != null ">
+                    <span fxShow="true" fxHide.lt-md class="col-md-2 "><a href="{{dataurl.url}}" target="blanck">
+                        <mat-icon>attach_file</mat-icon>
+                      </a></span>
+                  </div>
+
+                  <p class="text-small mt20 text-muted">{{dataurl.url}}</p>
+                  <div class="mt20" *ngIf="dataurl.url != undefind || dataurl.url != null">
+                    <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{dataurl.url}}" download>
+                        <span class="material-icons downloadIcon">
+                          get_app
+                        </span>
+                      </a></span>
+                  </div>
+                </div>
+                <div class="row col-md-12" *ngFor="let dataurlNotAssign of data.urlNotAssign;">
+                  <div class="mt20" *ngIf="dataurlNotAssign.urlNotAssign != undefind || dataurlNotAssign.urlNotAssign != null ">
+                    <span fxShow="true" fxHide.lt-md class="col-md-2 "><a href="{{dataurlNotAssign.urlNotAssign}}" target="blanck">
+                        <mat-icon>attach_file</mat-icon>
+                      </a></span>
+                  </div>
+
+                  <p class="text-small mt20 text-muted">{{dataurlNotAssign.urlNotAssign}}</p>
+                  <div class="mt20" *ngIf="dataurlNotAssign.urlNotAssign != undefind || dataurlNotAssign.urlNotAssign != null">
+                    <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{dataurlNotAssign.urlNotAssign}}" download>
+                        <span class="material-icons downloadIcon">
+                          get_app
+                        </span>
+                      </a></span>
+                  </div>
+                </div>
+                <div class="editDiv">
+                  <a class="editIcon" (click)="editClick(data,p,'ePost')">
+                    <span class="material-icons">
+                      create
+                    </span>
+                    Edit
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- attached file name start -->
+      <div *ngIf="attachedFileName!=null">
+        <div class="row rowAttachedFile" *ngFor="let filedt of attachedFileName;let f = index">
+          <div class="col-md-1 col-sm-1">
+            <div class="squareCls"></div>
+          </div>
+          <div class="col-md-9 col-sm-9">
+            <span class="docName">Document name:</span><span *ngIf="fileNameEdit[f]==null">{{filedt?.name}}</span>
+            <span class="material-icons downloadIcon editFileIcon" (click)="editFileName(filedt,f)"
+              *ngIf="fileNameEdit[f]==null">
+              create
+            </span>
+            <input type="text" [(ngModel)]="fileNameEdit[f]" *ngIf="fileNameEdit[f]!=null"
+              class="form-control inputFileName" />
+          </div>
+          <div class="col-md-1 col-sm-1 saveCls ">
+            <a *ngIf="fileNameEdit[f]!=null" class="saveFileName"
+              (click)="saveFileName(filedt,fileNameEdit[f],f)">Save</a>
+
+          </div>
+          <div class="col-md-1 col-sm-1  assignCls">
+            <!-- <a (click)="assignAttachmentClick(filedt,'assign',f)" *ngIf="AssignInfo[f]!='Assigned'">
+              <span class="assignLable">Assign</span>
+            </a> -->
+
+            <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu" *ngIf="AssignInfo[f]!='Assigned'" >Assign</button>
+            <mat-menu #menu="matMenu" >
+           <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked"  (click)="assignAttachmentClick(filedt,'assign',f)" >{{item.name}}</button>
+            </mat-menu>
+            <span class="assignLable" *ngIf="AssignInfo[f]=='Assigned'"
+              (click)="assignAttachmentClick(filedt,'removeAssign',f)">Assigned</span>
+            <a *ngIf="fileNameEdit[f]!=null" class="saveFileName clearBtn" (click)="clearAttachedFile(filedt,f)">
+              <span class="material-icons">clear</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- attached file name end -->
+    </div>
+    <div class="card">
+
+      <div class="col-md-12 example-card input-group" *ngIf="replyToMsg != ''">
+        <a class="user-msg" pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="myEasing"
+          [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#{{replyToMsg.Id}}">
+          {{replyToMsg.msg}}</a>
+      </div>
+      <div class="input-group" id="btn-input">
+        <div class="input-group-append">
+          <button id="button-addon2" (click)="open(mymodal)" type="button" class="btn btn-link text-small">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+        </div>
+        <!-- <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept=".pdf,.doc,.txt" style="display:none;" (change)="fileEvent($event)" /> -->
+        <input [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
+          (input)="jsonArray[2].msg=$event.target.textContent" type="text" #titleInput [(ngModel)]='usermsg'
+          name="usermsg" placeholder="Type a message" aria-describedby="button-addon2"
+          class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
+        <div class="input-group-append" *ngIf="replyToMsg != '' || usermsg !=''">
+          <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link"> <i
+              class="fa fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #mymodal let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
+        <button type="button" class="close" aria-label="Close" (click)="ModelClose(mymodal)">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+          <label style="margin-top: 10px;">File </label>
+          <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+            <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,.ppt,.pptx" multiple (change)="uploadFile($event.target.files)">
+          </div>
+        </div>
+          <!-- <input  type="file"  #fileInput  class="form-control" (change)="fileNameData(fileInput)" />  -->
+        </div>
+        <div  class="files-list" *ngFor="let file of files;let i= index">
+          <p> {{ file }} </p>
+          <button class="delete-file" (click)="deleteAttachment(i)">
+            <img src="../../../assets/images/Recycle_Bin_Full.png">
+          </button>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-success" (click)="modal.close('Save click')">Ok</button>
+        <button type="button" class="btn btn-danger" (click)="ModelClose(mymodal)">Cancel</button>
+      </div>
+    </ng-template>
+
+    </div>
+</div>

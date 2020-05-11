@@ -1,0 +1,101 @@
+<div class="px-0">
+  <div class="col-12" style="padding-top: 10px;">
+                <mat-card class="card">
+                  <h6 class="chat-msg-userneme" >Document Checklist</h6>
+                     <mat-card-content>
+                      <div class="row">
+                        <div class="col-12 mobile_width ">
+                        <mat-selection-list class="menu_cls" #shoes (selectionChange)="onClick(mymodal,$event.option)">
+                          <div><span><mat-list-option checkboxPosition="before" *ngFor="let shoe of items;let i = index" [selected]="shoe.checked" [value]="i" >
+                         {{shoe.name}}<span style="float: right;"><button class="btn primary clsUploadbtn" style="color: blue; line-height:15px !important;" (click)="open(mymodal,shoe,i)">Upload File</button> </span>
+                        </mat-list-option>
+                      </span>
+                        </div>
+                        </mat-selection-list>
+                      </div>
+                    </div>
+                    </mat-card-content>
+                    <mat-card-footer></mat-card-footer>
+                </mat-card> 
+                <mat-card class="card">
+                  <h6 class="chat-msg-userneme">Other Uploaded Documents</h6>
+                     <mat-card-content>
+                      <div class="">
+                        <mat-list role="list" *ngFor="let shoe of uploadedDocs;let i = index">
+                  
+                          <mat-list-item role="listitem" class="clsUploadbtn">{{shoe.name}}
+                            <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu"  >Assign</button>
+                            <mat-menu #menu="matMenu" >
+                           <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked" (click)="selectedMenu(item,i,m)" >{{item.name}}</button>
+                         </mat-menu>
+                          </mat-list-item>
+                        </mat-list>
+
+                        <div *ngFor="let data of UpdatedFilesData;let fileindex = index">
+                          <span>{{data[i]}}</span>
+                        <mat-list role="list" *ngFor="let dataurl of data.docUrl;let i = index">
+                         
+                          <mat-list-item role="listitem" class="clsUploadbtn">{{dataurl.url}}
+                            <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu">Assign</button>
+                            <mat-menu #menu="matMenu" >
+                              <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked" (click)="selectedMenuUpload(item,data.docUrl,m,fileindex)" >{{item.name}}</button>
+                            </mat-menu>
+                          </mat-list-item>
+                          
+                        </mat-list>
+                      </div>
+                      </div>
+                    </mat-card-content>
+                    <mat-card-footer></mat-card-footer>
+                </mat-card>
+                <mat-card class="card">
+                  <h6 class="chat-msg-userneme">Completed</h6>
+                  <mat-card-content>
+                   <div class="row">
+                     <div class="col-12 col-md-8 mobile_width" >
+                     <mat-selection-list #shoes  disabled>
+                       <mat-list-option checkboxPosition="before" *ngFor="let shoe of items1" [selected]="shoe.checked" >
+                      {{shoe.name}}
+                       </mat-list-option>
+                     </mat-selection-list>
+                   </div>
+                 </div>
+                 </mat-card-content>
+                 <mat-card-footer></mat-card-footer>
+             </mat-card> 
+             
+             <ng-template #mymodal let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <label>File Name</label>
+                  <input type="text"  #textInput class="form-control" /> 
+                </div>
+                <div>
+                  <div>
+                  <label style="margin-top: 10px;">File </label>
+                  <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                    <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls" (change)="uploadFile($event.target.files)">
+                  </div>
+                </div>
+                  <!-- <input  type="file"  #fileInput  class="form-control" (change)="fileNameData(fileInput)" />  -->
+                </div>
+                <div  class="files-list" *ngFor="let file of files;let i= index">
+                  <p> {{ file }} </p>
+                  <button class="delete-file" (click)="deleteAttachment(i)">
+                    <img src="../../../assets/images/Recycle_Bin_Full.png">
+                  </button>
+               </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button"  class="btn btn-success" (click)="onFileSelect(fileInput,textInput);modal.close('Save click')">Ok</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Cancel</button>
+              </div>
+            </ng-template>
+              </div>
+</div>

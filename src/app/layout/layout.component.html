@@ -1,0 +1,95 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="nav-brand chat-msg-userneme" fxShow="true" fxHide.lt-md>
+      <span class="portal-name">Client</span>
+      <span style="color:#ffff;margin-left: 4px;">Portal</span>
+    </div>
+
+    <!--mobile view showing case dropdown start-->
+    <div class=" card case-nav-block mobileBlock" style="display:block;" fxShow.sm="true" fxShow.lg="false"
+      fxShow.md="false" fxShow.gt-md="false" fxShow="true">
+      <mat-form-field class="my-select template-select mobileCaseCls">
+        <mat-select (selectionChange)="onCountrySelectionChanged($event)" [value]="selectedcase">
+          <mat-option *ngFor="let case of ClientData.cases" [value]="case.id">
+            <span class="mobileCaseCls">Case : {{ case.id }} {{ case.case }} {{ case.caseType }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!--mobile view showing case dropdown end-->
+    <div class=" card case-nav-block " style="display:block;" fxShow="true" fxHide.lt-md>
+      <mat-form-field class="my-select template-select">
+        <mat-select (selectionChange)="onCountrySelectionChanged($event)" [value]="selectedcase">
+          <mat-option *ngFor="let case of ClientData.cases" [value]="case.id">
+            <span>Case : {{ case.id }} {{ case.case }} {{ case.caseType }}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxShow="true" fxHide.lt-md>
+      <mat-tab-group (selectedTabChange)="yourFn($event)">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">inbox</mat-icon>
+            Message Board
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">content_paste</mat-icon>
+            Document Checklist
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+
+    </div>
+    <span class="nav-spacer-mini"></span>
+    <button class="hidden-sm" mat-icon-button [routerLink]="['/profile']">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-icon-button (click)="onLoggedout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="matTabForMobile" fxShow.sm="true" fxShow.lg="false" fxShow.md="false" fxShow.gt-md="false" fxShow="true">
+  <mat-tab-group (selectedTabChange)="yourFn($event)">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">inbox</mat-icon>
+        Message Board
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon">content_paste</mat-icon>
+        Document Checklist
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<!--For mobile view end-->
+<mat-sidenav-container fxFlexFill>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item [routerLinkActive]="'active'" style="padding: 10px;" [routerLink]="['/posts']"
+        (click)="sidenav.toggle()">
+        {{ ' Message Board' | translate }}
+      </a>
+      <a mat-list-item [routerLinkActive]="'active'" [routerLink]="['/documents']" (click)="sidenav.toggle()">
+        {{ 'Document Checklist' | translate }}
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

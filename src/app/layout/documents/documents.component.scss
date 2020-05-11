@@ -1,0 +1,175 @@
+.my-class1
+{
+    cursor:not-allowed;
+    pointer-events: none;
+}
+
+.my-class2
+{
+    cursor:pointer;
+}
+.menu_cls
+    {
+         color: blue; 
+         line-height:0px !important;
+         float:none;
+         margin-left: auto !important;
+    }
+
+  ::ng-deep .mat-pseudo-checkbox.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox.mat-pseudo-checkbox-indeterminate 
+{
+    background:green !important;
+    cursor:not-allowed !important;
+    pointer-events: none !important;
+}
+.mat-list-item-disabled {
+    background-color: #fff !important;
+}
+table {
+    width: 100%;
+}
+.mat-card {
+    text-align: initial;
+    img {
+        border-radius: 5px;
+        margin-top: -25px;
+    }
+}
+.mat-table {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mat-cell, .mat-footer-cell {
+    font-size: 14px !important;
+}
+mat-cell:nth-child(1),
+mat-header-cell:nth-child(1) {
+    flex: 0 0 30%;
+}
+
+mat-cell:nth-child(5),
+mat-header-cell:nth-child(5) {
+    flex: 0 0 10%;
+}
+
+
+.mat-column-value {
+    flex: 0 0 25% !important;
+    min-width: 104px !important;
+}
+
+.mat-column-viewValue
+{
+    flex: 0 0 25% !important;
+    min-width: 104px !important;
+    width: 50% !important;
+}
+
+.px-0 {
+    padding-right: 10% !important;
+    padding-left: 10% !important;
+    top:10px;
+    height: 80vh;
+  }
+
+  .mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text {
+    width: auto !important;
+}
+
+
+.mobile_width .mat-list-item-content{
+    align-items: inherit;
+    height: auto !important;
+}
+
+.uploadDocument {
+    width: auto;
+       }
+    
+// --------------------My css---------------------
+.mat-list-base .mat-list-item, .mat-list-base .mat-list-option{
+    display: inline;
+}
+
+@media screen and (max-width: 575px){
+   
+    .mobile_width {
+     width: 100% !important;
+    }
+    .mobile_width .mat-list-item-content{
+        align-items: inherit;
+    }
+    .px-0 {
+        padding: 0px !important;
+          top:10px;
+        }
+
+        .chat-msg-userneme{
+            font-size: 12px;
+          }
+
+          .mat-list-base .mat-list-option {
+            
+            font-size: 12px!important;
+        }
+        .clsUploadbtn{
+            font-size: 12px;
+        }
+  }
+  @media screen and (max-width: 575px){
+    .mobile_width {
+     width: 100% !important;
+    }
+    .mobile_width .mat-list-item-content{
+        align-items: inherit;
+        height: auto !important;
+    }
+  }
+  .assignLabel{
+    display: none;
+  }
+
+  .uploadfilecontainer {
+    background-image: url("../../../assets/images/cloud-2044823_960_720.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+}
+
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.files-list .delete-file img {
+    width: 30px;
+}

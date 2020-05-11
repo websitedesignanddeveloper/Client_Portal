@@ -1,0 +1,446 @@
+.card {
+    border-radius: 0px !important;
+    bottom: 39px;
+}
+.example-card {
+    background-color: #cecece;
+}
+
+.Card-div {
+    width: 80%;
+}
+.file-button {
+    padding-left: 20px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.upload-button {
+    float: right;
+    margin-right: 20px;
+}
+
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+    margin-right: 5px;
+}
+
+.panel-body {
+    overflow-y: scroll;
+    height: 250px;
+}
+
+.upload-complete {
+    background: green;
+    color: #ffffff;
+}
+.user-msg {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.user-msg:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.main-container {
+    position: absolute;
+    top: 64px;
+    left: 10% !important;
+    right: 10% !important;
+    bottom: 0;
+    padding: 20px;
+}
+
+.px-0 {
+    padding-right: 10% !important;
+    padding-left: 10% !important;
+    top: 10px;
+}
+
+.mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 125px !important;
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+body {
+    background-color: #74ebd5;
+    background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+    min-height: 100vh;
+    font-family: "Poppins" !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    width: 5px;
+    background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: #ddd;
+    outline: 1px solid slategrey;
+    border-radius: 1rem;
+}
+
+.text-small {
+    font-size: 0.9rem!important;
+}
+
+.text-to-small {
+    font-size: 0.7rem;
+}
+
+.messages-box,
+.chat-box {
+    height: 68vh;
+    overflow-y: scroll;
+}
+
+.reply-cls {
+    background: #ecf2fe;
+    position: relative;
+    align-items: center;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+.timeSpan {
+    margin-left: 0px;
+    color: #cecece;
+    display: contents;
+}
+
+.timeSpan1 {
+    margin-left: 0px;
+    margin-top:1%;
+    color: #9d9d9f;
+    display: contents;
+    font-size: 12px;
+}
+
+.hr-text {
+    line-height: 1em;
+    position: relative;
+    outline: 0;
+    border: 0;
+    color: black;
+    text-align: center;
+    height: 1.5em;
+    opacity: 0.5;
+    &:before {
+        content: "";
+        // use the linear-gradient for the fading effect
+        // use a solid background color for a solid bar
+        background: linear-gradient(to right, #818078, #818078, #818078);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+    }
+    &:after {
+        content: attr(data-content);
+        position: relative;
+        display: inline-block;
+        color: black;
+
+        padding: 0 0.5em;
+        line-height: 1.5em;
+        // this is really the only tricky part, you need to specify the background color of the container element...
+        color: #818078;
+        background-color: #fcfcfa;
+    }
+}
+.avatar-circle {
+    width: 35px;
+    height: 35px;
+    background-color: #2196f3;
+    text-align: center;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: -5px;
+}
+.initials {
+    position: relative;
+    font-size: 16px; /* 50% of parent */
+    line-height: 0px; /* 50% of parent */
+    color: #fff;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    //top: 5px;
+    padding: 10px;
+}
+
+.bg-light {
+    background-color: #f5f6f8 !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: #5788c7 !important;
+    display: none !important;
+}
+
+::ng-deep .mat-toolbar .mat-form-field-underline,
+.mat-toolbar .mat-form-field-ripple,
+.mat-toolbar .mat-focused .mat-form-field-ripple {
+    background-color: #5788c7 !important;
+    display: none !important;
+}
+
+.txtdate {
+    margin-bottom: 2px;
+}
+.editDiv {
+
+    text-align: right;
+    position: absolute;
+    right: 7px;
+
+    .editIcon {
+        display: none;
+    }
+}
+.reply-cls:hover {
+    .editDiv {
+
+        .editIcon {
+            display: flex;
+        }
+    }
+}
+@media screen and (max-width: 575px) {
+    .px-0 {
+        padding: 0px !important;
+        top: 10px;
+    }
+    .msgTxt {
+        width: max-content;
+    }
+    .ml-3,
+    .mx-3 {
+        margin-left: 0px !important;
+    }
+    .edit {
+        display: block !important;
+    }
+    .txtdate {
+        font-size: 9px;
+        margin-bottom: 2px;
+    }
+    .txtinfo {
+        font-size: 11px;
+    }
+    .material-icons {
+        font-size: 16px;
+    }
+    .w-50 {
+        width: 58% !important;
+    }
+    .editDiv {
+        text-align: right;
+        position: absolute;
+        right: 7px;
+        .editIcon {
+            font-size: 9px;
+            .material-icons {
+                font-size: 10px !important;
+            }
+        }
+    }
+    .text-small {
+        font-size: 11px!important;
+    }
+    .rowAttachedFile {
+        font-size: 9px;
+    }
+    .squareCls {
+        display: none;
+    }
+    .editFileIcon {
+        font-size: 10px;
+        margin-left: 1%;
+    }
+    .inputFileName {
+        font-size: 11px;
+    }
+    .clearBtn {
+        position: absolute;
+        top: -59px !important;
+        right: 7px;
+    }
+    .messages-box,
+.chat-box {
+     height: 70vh;
+    overflow-y: scroll;
+}
+.timeSpan1 {
+    font-size: 9px;
+}
+.saveCls {
+    align-items: center;
+    display: flex;
+    justify-content: left!important;
+}
+.assignCls{
+    align-items: center;
+    display: flex;
+    justify-content: right!important;
+    float: right;
+    margin-right: 1%;
+}
+}
+
+@media screen and (min-width: 1024px) {
+    .chat-box {
+        height: 85vh;
+       overflow-y: scroll;
+   }
+}
+.profile-pic {
+    position: relative;
+    display: block;
+    margin-right: 15%;
+}
+
+.profile-pic:hover .edit {
+    display: block;
+}
+
+.edit {
+    display: none;
+}
+
+.edit a {
+    color: #000;
+}
+
+.downloadIcon {
+    color: grey !important;
+}
+.editIcon {
+    color: grey !important;
+    display: flex;
+}
+.rowAttachedFile {
+    margin-left: 3%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: 1px solid #ccc8c8;
+}
+.squareCls {
+    height: 50px;
+    width: 80%;
+    background-color: #ccc8c8;
+}
+.docName {
+    color: #ccc8c8;
+    margin-right: 1%;
+}
+.saveFileName {
+    color: #007bff;
+}
+.assignLable {
+    color: #007bff;
+}
+.saveCls {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.assignCls {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.clearBtn {
+    position: absolute;
+    top: -7px;
+    right: 7px;
+}
+.editFileIcon {
+    margin-left: 1%;
+}
+
+.txtUpload{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+::ng-deep .mat-pseudo-checkbox.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox.mat-pseudo-checkbox-indeterminate 
+{
+    background:green !important;
+    cursor:not-allowed !important;
+    pointer-events: none !important;
+}
+
+//test files 
+
+.uploadfilecontainer {
+    background-image: url("../../../assets/images/cloud-2044823_960_720.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+}
+
+.files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.files-list .delete-file img {
+    width: 30px;
+}

@@ -1,0 +1,56 @@
+<div class="px-0">
+  <div  style="padding-top: 10px;">
+    <div class="bg-white " >
+      <div class="media">
+          <div class="container" *ngIf="!post; else forminfo" novalidate> 
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+              <div class="text-center profileTitle">
+                <span class="fill-remaining-space text-center">User Profile</span>
+              </div>
+              
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label>Email Address</mat-label>
+              <input matInput placeholder="Email Address" formControlName="email">
+              <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+                {{ getErrorEmail() }}
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" readonly>
+              <mat-error *ngIf="!name.valid && name.touched">
+                {{ titleAlert }}
+              </mat-error>
+            </mat-form-field>
+           
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label>Address</mat-label>
+              <textarea matInput placeholder="Address" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="address"></textarea>
+              <mat-error *ngIf="!formGroup.controls['address'].valid && formGroup.controls['address'].touched">
+                Required field.
+              </mat-error>
+            </mat-form-field>
+          
+            <mat-form-field appearance="outline" class="form-element">
+              <mat-label>Mobile</mat-label>
+              <input matInput placeholder="Mobile" formControlName="mobile">
+              <mat-error *ngIf="!formGroup.controls['mobile'].valid && formGroup.controls['mobile'].touched">
+                Requried field.
+              </mat-error>
+            </mat-form-field>
+          
+              <div class="form-element editCancelBtn">
+                  <button class="editBtn" mat-raised-button color="primary" type="submit"  [disabled]="!formGroup.valid">Edit Profile</button>
+                  <button mat-raised-button color="warn" type="submit" (click)="GotoBack()" >Cancel</button>
+              </div>
+            </form>
+          </div>   
+    </div>
+  </div>
+</div>
+<ng-template #forminfo>
+  <div class="container">
+    {{ post | json }}
+  </div>
+</ng-template> 
