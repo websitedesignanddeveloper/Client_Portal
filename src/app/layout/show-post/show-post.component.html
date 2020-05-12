@@ -89,7 +89,21 @@
                       </a>
                     </span>
                   </div>
-                  <p class="text-small mb-0 text-muted txtinfo">{{data.reply}} </p>
+                  <p *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}} </p>
+                  <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
+                    (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
+                    name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
+                    class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,i,j)">
+                  
+                  <div class="input-group-append" *ngIf="editusermsg !='' && data.isEdit == true">
+                      <button (click)="EditMsgReply(edittitleInput, replyToMsg,i,j)" type="submit" class="btn btn-link"> 
+                        Save
+                      </button>
+                      <button (click)="cancelEdit(i,j,data)" class="btn btn-link"> 
+                        Cancel
+                      </button>
+                    </div>
+                  
                   <div *ngIf="data.docUrl != undefind || data.docUrl != null">
                     <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{data.docUrl}}" download>
                         <span class="material-icons downloadIcon">
@@ -98,7 +112,7 @@
                       </a></span>
                   </div>
                   <div class="editDiv">
-                    <a class="editIcon" (click)="editClick(data,i,j)">
+                    <a *ngIf="isEdit != true" class="editIcon" (click)="editClick(data,i,j)">
                       <span class="material-icons">
                         create
                       </span>
@@ -123,8 +137,22 @@
               <div class="reply-cls rounded py-2 px-3 mb-2 row">
                 <div class="row  col-md-12">
                   {{ item }}
-                  <p class="text-small mb-0 text-muted txtinfo">{{data.reply}}</p>
-                  <div *ngIf="data.length-1 == i">
+                  <p *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}}</p>
+                  <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
+                    (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
+                    name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
+                    class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,p,'ePost')">
+                  
+                    <div class="input-group-append" *ngIf="editusermsg !='' && data.isEdit == true">
+                      <button (click)="EditMsgReply(edittitleInput , replyToMsg,p,'ePost')" type="submit" class="btn btn-link"> 
+                        Save
+                      </button>
+                      <button (click)="cancelEdit(p,'ePost',data)" class="btn btn-link"> 
+                        Cancel
+                      </button>
+                    </div>
+
+                    <div *ngIf="data.length-1 == i">
                     <span class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></span>
                   </div>
                 </div>
@@ -136,6 +164,7 @@
                   </div>
 
                   <p class="text-small mt20 text-muted">{{dataurl.url}}</p>
+                  
                   <div class="mt20" *ngIf="dataurl.url != undefind || dataurl.url != null">
                     <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{dataurl.url}}" download>
                         <span class="material-icons downloadIcon">
@@ -161,7 +190,7 @@
                   </div>
                 </div>
                 <div class="editDiv">
-                  <a class="editIcon" (click)="editClick(data,p,'ePost')">
+                  <a *ngIf="isEdit != true" class="editIcon" (click)="editClick(data,p,'ePost')">
                     <span class="material-icons">
                       create
                     </span>

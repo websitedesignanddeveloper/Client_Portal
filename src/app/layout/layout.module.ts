@@ -17,6 +17,7 @@ import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
 import { NotesComponent } from './notes/notes.component';
 import {ShowPostComponent} from './show-post/show-post.component';
+import {MobileDashboardComponent} from './mobile-dashboard/mobile-dashboard.component';
 import {DocumentComponent} from './documents/documents.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -50,7 +51,7 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
         ScrollToModule.forRoot()
     ],
-    declarations: [NotesComponent,DocumentComponent,ShowPostComponent, LayoutComponent, NavComponent, TopnavComponent,  ]
+    declarations: [NotesComponent,DocumentComponent,ShowPostComponent,MobileDashboardComponent, LayoutComponent, NavComponent, TopnavComponent,  ]
 
 })
 export class LayoutModule { }

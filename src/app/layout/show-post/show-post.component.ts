@@ -22,6 +22,7 @@ export class ShowPostComponent implements OnInit {
   @ViewChild('closeBtn') closeBtn: ElementRef;
   @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
   @ViewChild("titleInput") titleInput: QueryList<ElementRef>;
+  @ViewChild("edittitleInput") edittitleInput: QueryList<ElementRef>;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   underUpdateTagId = null;
   public posts: any = [];
@@ -33,6 +34,7 @@ export class ShowPostComponent implements OnInit {
   jsonArray: any = [];
   urls: any = [];
   usermsg: string = "";
+  editusermsg: string = "";
   selected_index = 0;
   public fullName: string = "";
   public isEdit: boolean = false;
@@ -46,7 +48,6 @@ export class ShowPostComponent implements OnInit {
     { value: 'case1', viewValue: 'case1' },
     { value: 'case2', viewValue: 'case2' },
     { value: 'case3', viewValue: 'case3' },
-
   ];
 
   items = [
@@ -195,25 +196,73 @@ export class ShowPostComponent implements OnInit {
       }
       this.usermsg = '';
       this.replyToMsg = '';
-      
+      setTimeout(()=>{this.scrollToBottom();},100);
     }
     else {
       //edit code
       if(this.isEditPost==false){
-        console.log('Edited Text : ', this.usermsg);
-        this.editArrayData.reply = this.usermsg;
-        this.usermsg = '';
+        console.log('Edited Text : ', this.editusermsg);
+        this.editArrayData.reply = this.editusermsg;
+        this.editusermsg = '';
         this.isEdit = false;
       }
       else{
-        console.log('Edited POST Text : ', this.usermsg,'Edit array data :',this.editArrayData);
-        this.editArrayData.reply = this.usermsg;
-        this.usermsg = '';
+        console.log('Edited POST Text : ', this.editusermsg,'Edit array data :',this.editArrayData);
+        this.editArrayData.reply = this.editusermsg;
+        this.editArrayData['isEdit']=false;
+        this.editusermsg = '';
         this.isEdit = false;
         this.isEditPost=false;
         console.log('After edit array data : ',this.editArrayData);
       }  
+      setTimeout(()=>{this.scrollToBottom();},100);
     }
+  }
+
+  EditMsgReply(replydata, fromdata,i,j)
+  {
+    //edit code
+    if(this.isEditPost==false){
+      console.log('Edited Text : ', this.editusermsg);
+      this.jsonArray[2].msgs[j].reply[i]['isEdit']=false;
+      this.editArrayData.reply = this.editusermsg;
+      this.editusermsg = '';
+      this.isEdit = false;
+    }
+    else{
+      console.log('Edited POST Text : ', this.editusermsg,'Edit array data :',this.editArrayData);
+      this.editArrayData.reply = this.editusermsg;
+      //this.jsonArray[2].msgs[j].reply[i]['isEdit']=false;
+      this.posts[i]['isEdit']=false;
+      this.editusermsg = '';
+      this.isEdit = false;
+      this.isEditPost=false;
+      console.log('After edit array data : ',this.editArrayData);
+    }  
+    setTimeout(()=>{this.scrollToBottom();},100);
+  }
+
+  cancelEdit(i,j,data)
+  {
+    //edit code
+    if(this.isEditPost==false){
+      console.log('Edited Text : ', this.editusermsg);
+      this.jsonArray[2].msgs[j].reply[i]['isEdit']=false;
+      this.editArrayData.reply = data.reply;
+      this.editusermsg = '';
+      this.isEdit = false;
+    }
+    else{
+      console.log('Edited POST Text : ', this.editusermsg,'Edit array data :',this.editArrayData);
+      this.editArrayData.reply = data.reply;
+      //this.jsonArray[2].msgs[j].reply[i]['isEdit']=false;
+      this.posts[i]['isEdit']=false;
+      this.editusermsg = '';
+      this.isEdit = false;
+      this.isEditPost=false;
+      console.log('After edit array data : ',this.editArrayData);
+    }  
+    setTimeout(()=>{this.scrollToBottom();},100);
   }
 
   onUpload() { }
@@ -237,11 +286,15 @@ export class ShowPostComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
+    //this.scrollToBottom();
+  }
+
+  ngAfterViewInit() {
     this.scrollToBottom();
   }
 
   ngOnInit() {
-    this.scrollToBottom();
+    //this.scrollToBottom();
     this.activatedRoute.params.forEach(params => {
       this.selectedcase = params["id"];
       if (this.selectedcase == null || this.selectedcase == undefined) {
@@ -319,14 +372,18 @@ export class ShowPostComponent implements OnInit {
   // }
   beforeEdit(jsonArray, index) {
     this.underUpdateTagId = jsonArray.Id;
-    this.titleInput.toArray()[index].nativeElement.focus();
+    //this.titleInput.toArray()[index].nativeElement.focus();
+    this.edittitleInput.toArray()[index].nativeElement.focus();
   }
 
   editClick(data, i, j) {
     if(j!='ePost'){
       console.log('selected edit message : ', JSON.stringify(data));
-      this.usermsg = data.reply;
+      this.editusermsg = data.reply;
       var arrayJson = this.jsonArray[2].msgs[0].reply;
+      //this.jsonArray[2].msgs[j].reply[i].isEdit == true;
+      this.jsonArray[2].msgs[j].reply[i]['isEdit']=true;
+      console.log('this.jsonArray[2].msgs[j].isEdit===>'+this.jsonArray[2].msgs[j].reply[i].isEdit);
       console.log('json array : ', arrayJson);
       console.log('JSON FULL ARRAY : ', this.jsonArray[2].msgs[j].reply[i], i, j);
       this.isEdit = true;
@@ -335,7 +392,9 @@ export class ShowPostComponent implements OnInit {
     else
     {
       console.log('edit click post selected message : ',data);
-      this.usermsg = data.reply;
+      this.editusermsg = data.reply;
+      console.log('JSON post array:',this.posts);
+      this.posts[i]['isEdit']=true;
       console.log('JSON post array:',this.posts);
       this.isEdit = true;
       this.isEditPost=true;

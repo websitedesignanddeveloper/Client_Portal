@@ -10,7 +10,7 @@
     </div>
 
     <!--mobile view showing case dropdown start-->
-    <div class=" card case-nav-block mobileBlock" style="display:block;" fxShow.sm="true" fxShow.lg="false"
+    <div *ngIf="_isNotMobile==true" class=" card case-nav-block mobileBlock" style="display:block;" fxShow.sm="true" fxShow.lg="false"
       fxShow.md="false" fxShow.gt-md="false" fxShow="true">
       <mat-form-field class="my-select template-select mobileCaseCls">
         <mat-select (selectionChange)="onCountrySelectionChanged($event)" [value]="selectedcase">
@@ -53,13 +53,13 @@
     <button class="hidden-sm" mat-icon-button [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-icon-button (click)="onLoggedout()">
+    <button [ngClass]="_isNotMobile!=true?'mobileExitBtn':''" mat-icon-button (click)="onLoggedout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="matTabForMobile" fxShow.sm="true" fxShow.lg="false" fxShow.md="false" fxShow.gt-md="false" fxShow="true">
+<div *ngIf="_isNotMobile==true" class="matTabForMobile" fxShow.sm="true" fxShow.lg="false" fxShow.md="false" fxShow.gt-md="false" fxShow="true">
   <mat-tab-group (selectedTabChange)="yourFn($event)">
     <mat-tab>
       <ng-template mat-tab-label>

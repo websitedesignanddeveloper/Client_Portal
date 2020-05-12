@@ -1,0 +1,13 @@
+<div class="container">
+<h4>Select a Case :</h4>
+<mat-list role="list" *ngFor="let dataurl of cases;let i = index">    
+    <mat-list-item role="listitem" class="clsUploadbtn">
+        <a matLine href="...">{{dataurl.viewValue}}</a>
+        <button mat-icon-button (click)="goToPost(i)">
+            <span class="material-icons">
+                keyboard_arrow_right
+            </span>
+           </button>
+    </mat-list-item>
+</mat-list>
+</div>
