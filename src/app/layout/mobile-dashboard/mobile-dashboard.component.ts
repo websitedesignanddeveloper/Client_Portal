@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
   selector: 'app-mobile-dashboard',

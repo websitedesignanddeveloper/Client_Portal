@@ -74,7 +74,11 @@ mat-header-cell:nth-child(5) {
     padding-right: 10% !important;
     padding-left: 10% !important;
     top:10px;
-    height: 80vh;
+    height: 82vh;
+    //overflow-y: scroll;
+  }
+  .increaseHeight{
+    height: 70vh !important;
   }
 
   .mat-list-base .mat-list-item .mat-list-text, .mat-list-base .mat-list-option .mat-list-text {

@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit {
      selectedcase="1";
      selectedtype="";
      selectedstatus="";
-    constructor(private router: Router) {}
+    constructor(public router: Router) {}
 
     ClientData = { "clientName":"Jhon Smith","cases":[
       { "id": "1", "case": "Case1" ,"caseType":"Type1","caseStatus":"waiting for documents"},

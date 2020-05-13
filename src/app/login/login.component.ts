@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
             console.log(this.form.value);
             localStorage.setItem('isLoggedin', 'true');
             localStorage.setItem('UserName', this.form.value.username);
-            (this._isNotMobile)?this.router.navigate(['/posts',{id : 1}]):this.router.navigate(['/mobileDashboard',{id : 1}]);
+            (this._isNotMobile)?this.router.navigate(['/posts',{id : 1}]):this.router.navigate(['/mobileDashboard']);
             //this.router.navigate(['/posts',{id : 1}]);
         }
       }
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     onLogin() {
         localStorage.setItem('isLoggedin', 'true');
         //this.router.navigate(['/posts']);
-        (this._isNotMobile)?this.router.navigate(['/posts',{id : 1}]):this.router.navigate(['/mobileDashboard',{id : 1}]);
+        (this._isNotMobile)?this.router.navigate(['/posts',{id : 1}]):this.router.navigate(['/mobileDashboard']);
     }
 
     @Input() error: string | null;

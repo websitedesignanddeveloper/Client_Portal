@@ -260,8 +260,8 @@
           name="usermsg" placeholder="Type a message" aria-describedby="button-addon2"
           class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
         <div class="input-group-append" *ngIf="replyToMsg != '' || usermsg !=''">
-          <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link"> <i
-              class="fa fa-paper-plane"></i>
+          <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link">
+            <mat-icon>send</mat-icon>
           </button>
         </div>
       </div>

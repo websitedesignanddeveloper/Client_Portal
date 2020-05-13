@@ -1,12 +1,17 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+    <button class="colorWhite" *ngIf="router.url != '/mobileDashboard'" mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
       <mat-icon>menu</mat-icon>
     </button>
 
-    <div class="nav-brand chat-msg-userneme" fxShow="true" fxHide.lt-md>
+    <div class="nav-brand chat-msg-userneme" fxShow="true" fxHide.lt-md >
       <span class="portal-name">Client</span>
-      <span style="color:#ffff;margin-left: 4px;">Portal</span>
+      <span style="color:#ffffff;margin-left: 4px;">Portal</span>
+    </div>
+
+    <div *ngIf="router.url == '/mobileDashboard'" fxHide.gt-sm class="nav-brand chat-msg-userneme mobileDashboardHeader">
+      <span class="portal-name">Client</span>
+      <span style="color:#ffffff;margin-left: 4px;">Portal</span>
     </div>
 
     <!--mobile view showing case dropdown start-->
@@ -50,10 +55,16 @@
 
     </div>
     <span class="nav-spacer-mini"></span>
-    <button class="hidden-sm" mat-icon-button [routerLink]="['/profile']">
+    <button class="colorWhite" *ngIf="router.url == '/mobileDashboard'" mat-icon-button >
+      <mat-icon class="notificationIcon">notifications</mat-icon>
+    </button>
+    <button class="colorWhite" *ngIf="router.url == '/mobileDashboard'" mat-icon-button [routerLink]="['/profile']">
+      <mat-icon class="account_circle">account_circle</mat-icon>
+    </button>
+    <button class="colorWhite" fxShow="true" fxHide.lt-sm mat-icon-button [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button [ngClass]="_isNotMobile!=true?'mobileExitBtn':''" mat-icon-button (click)="onLoggedout()">
+    <button class="colorWhite" *ngIf="router.url != '/mobileDashboard'" [ngClass]="_isNotMobile!=true?'mobileExitBtn':''" mat-icon-button (click)="onLoggedout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </mat-toolbar-row>
@@ -80,7 +91,7 @@
 <mat-sidenav-container fxFlexFill>
   <mat-sidenav #sidenav>
     <mat-nav-list>
-      <a mat-list-item [routerLinkActive]="'active'" style="padding: 10px;" [routerLink]="['/posts']"
+      <a mat-list-item [routerLinkActive]="'active'" style="padding: 10px;" [routerLink]="['/mobileDashboard']"
         (click)="sidenav.toggle()">
         {{ ' Message Board' | translate }}
       </a>

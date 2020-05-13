@@ -1,3 +1,44 @@
 .container{
+    padding: 0;
+}
+.rightArrowIcon{
+    position: absolute;
+    right: 10px;
+}
+h4 {
     padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    //letter-spacing: 0.5px;
+    color: #696363;
+    margin: 5px 0;
+    font-family: sans-serif;
+}
+.caseListItem {
+    font-size: 18px;
+    font-weight: 600;
+    //letter-spacing: 0.5px;
+    color: #696363;
+    line-height: 24px;
+    font-family: sans-serif;
+}
+.caseList {
+    padding: 15px 5px;
+    background: #fff;
+    border: 1px solid #d4d3d3;
+}
+
+span.notificationCount {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 1px;
+    bottom: 0;
+}
+.mat-icon-button button {
+    height: 24px;
+    width: 24px;
+    background: orange;
+    box-shadow: none;
+    right: 15px;
 }
