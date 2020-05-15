@@ -9,6 +9,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { observable } from 'rxjs';
 declare var jQuery: any;
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-show-post',
@@ -44,6 +45,8 @@ export class ShowPostComponent implements OnInit {
   public fileNameEdit:any=[];
   public AssignInfo:any=['Assign'];
   closeResult: string;
+  public pendingDocUpload: any = ['pendingDoc1','pendingDoc2'];
+  isPendingDoc: string = "";
   cases: any = [
     { value: 'case1', viewValue: 'case1' },
     { value: 'case2', viewValue: 'case2' },
@@ -148,6 +151,7 @@ export class ShowPostComponent implements OnInit {
 
   ReplyToMsg(data, val) {
     this.replyToMsg = data;
+    setTimeout(()=>{this.scrollToBottom();},100);
   }
 
   MsgReply(replydata, fromdata) {
@@ -158,7 +162,7 @@ export class ShowPostComponent implements OnInit {
       var date = new Date();
       var currentdate = this.datePipe.transform(date, 'dd-MMMM-yyyy');
       var time = this.datePipe.transform(date, 'hh:mm');
-      let filedetails = { case: this.selectedcase, Id: "2", msgId: "test1", reply: replydata.value, docUrl: [], date: currentdate, time: time,assigned:null,urlNotAssign:[] };
+      let filedetails = { case: this.selectedcase, Id: "2", msgId: "test1", reply: replydata.value, docUrl: [], date: currentdate, time: time,assigned:null,urlNotAssign:[],replyToMsg: this.replyToMsg != ''?this.replyToMsg:'', replyToMsgRemoved:false };
       this.posts.push(filedetails);
       if (file.length == 0 || file == null) {
         var fileurl = null;
@@ -176,6 +180,7 @@ export class ShowPostComponent implements OnInit {
           var fileurl = dataFile[i]['name'];
           var t = this.ClientData.massages[msgindex].msgs.length;
           this.posts[this.posts.length - 1].docUrl.push({ "url": fileurl });
+
           localStorage.setItem('PostsData', JSON.stringify(this.posts));
           this.usermsg = '';
           this.replyToMsg = '';
@@ -187,6 +192,7 @@ export class ShowPostComponent implements OnInit {
            var fileurl=dataFile[i]['name'];
           // var t = this.ClientData.massages[msgindex].msgs.length;
            this.posts[this.posts.length - 1].urlNotAssign.push({ "urlNotAssign": fileurl });
+           
            localStorage.setItem('PostsData', JSON.stringify(this.posts));
            this.usermsg = '';
            this.replyToMsg = '';
@@ -194,6 +200,7 @@ export class ShowPostComponent implements OnInit {
         }
       }
       }
+      console.log('this.posts==>'+JSON.stringify(this.posts));
       this.usermsg = '';
       this.replyToMsg = '';
       setTimeout(()=>{this.scrollToBottom();},100);
@@ -265,6 +272,16 @@ export class ShowPostComponent implements OnInit {
     setTimeout(()=>{this.scrollToBottom();},100);
   }
 
+  removeReplymsg(data, i,j)
+  {
+    if(this.posts[i]['replyToMsg'] != '')
+    {
+      this.posts[i]['replyToMsg'] = "";
+    }
+    this.posts[i]["replyToMsgRemoved"]=true;
+    console.log('this.posts[i]==>'+JSON.stringify(this.posts[i]));
+  }
+
   onUpload() { }
   onCountrySelectionChanged(data) {
     console.log('select changed...');
@@ -323,7 +340,7 @@ export class ShowPostComponent implements OnInit {
       scrollTarget: '.theEnd',
     });
   }
-
+  
   public myEasing = (t: number, b: number, c: number, d: number): number => {
     // easeInOutExpo easing
     if (t === 0) {
@@ -468,8 +485,9 @@ export class ShowPostComponent implements OnInit {
     }  
   }
   
-  open(content) {
-  
+  open($event,content,ispending) {
+    this.isPendingDoc = ispending != undefined || ispending != ''? ispending : '';
+ 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -481,7 +499,7 @@ export class ShowPostComponent implements OnInit {
   {
     this.attachedFileName=[];
     this.files=[];
-    this.modalService.dismissAll();
+    this.modalService.dismissAll();  
   }
 
   private getDismissReason(reason: any): string {
@@ -509,5 +527,61 @@ export class ShowPostComponent implements OnInit {
   deleteAttachment(index) {
     this.files.splice(index, 1)
     this.attachedFileName.splice(index, 1);
+  }
+
+  removeAssign(index)
+  {
+    this.attachedFileName.splice(index, 1);
+    this.files.splice(index, 1)
+  }
+
+  uploadFilePending(event) {
+    this.files=[];
+    for (let index = 0; index < event.length; index++) {
+      const element = event[index];
+      if(this.isPendingDoc == 'pendingDoc1')
+      {
+        this.pendingDocUpload[0]=element.name;
+      }
+      else if(this.isPendingDoc == 'pendingDoc2'){
+        this.pendingDocUpload[1]=element.name;
+      }
+      
+    }  
+  }
+  deleteAttachmentPending(index) {
+    //this.pendingDocUpload.splice(index, 1)
+    if(index ==0)
+    {
+      this.pendingDocUpload[0] = 'pendingDoc1';
+    }
+    else if(index ==1){
+      this.pendingDocUpload[1] = 'pendingDoc2';
+    }
+  }
+  
+  selectedChanged($event: MatSelectionListChange, pendingDoc) {
+    //alert($event.option.selected);
+    if(pendingDoc == 'pendingDoc1')
+    {
+      if(this.pendingDocUpload[0]=='pendingDoc1')
+      {
+        $event.option.selected = false;
+      }
+      else{
+        $event.option.selected = true;
+      }
+    }
+    
+    if(pendingDoc == 'pendingDoc2')
+    {
+      if(this.pendingDocUpload[1]=='pendingDoc2')
+      {
+        $event.option.selected = false;
+      }
+      else{
+        $event.option.selected = true;
+      }
+    }
   }
 }

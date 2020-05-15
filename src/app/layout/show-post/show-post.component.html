@@ -1,8 +1,10 @@
 <div class="px-0">
-  <div class="col-12" style="padding-top: 10px;padding-left: 0px;padding-right: 0px;">
+  <div class="col-12 parent" style="padding-top: 10px;padding-left: 0px;padding-right: 0px;">
+    <mat-card style="padding: 0px;">
+      <mat-card-content>
     <div class="px-4 py-5 chat-box bg-white" #scrollMe>
       <!--new design start-->
-      <div class="media w-50 mb-3">
+      <div class="media w-50 mb-3"style="margin-top: 15px;">
         <div class="avatar-circle" fxShow="true" fxHide.lt-md>
           <span class="initials">FA</span>
         </div>
@@ -14,12 +16,13 @@
             </p>
             <div class="row txtUpload">
               <div class="col-md-12">
-                <mat-selection-list>
+                <mat-selection-list (selectionChange)="selectedChanged($event,'pendingDoc1')">
                   <div>
                     <span>
-                      <mat-list-option checkboxPosition="before" [selected]="true">
+                      <mat-list-option checkboxPosition="before" [selected]="pendingDocUpload[0]!='pendingDoc1'" (click)="open($event,mymodal1,'pendingDoc1')">
                         <p class="text-small mb-0 text-muted txtinfo">Upload copy of your certificate 1.<br>
-                          <span class="timeSpan1">Uploaded- 11 April, 12:50</span>
+                          <span *ngIf="pendingDocUpload[0]!='pendingDoc1'" class="timeSpan1">Uploaded - {{pendingDocUpload[0]}}</span>
+                          <span *ngIf="pendingDocUpload[0]=='pendingDoc1'" class="timeSpan1 assignLable">Upload File</span>
                         </p>
                       </mat-list-option>
                     </span>
@@ -29,12 +32,13 @@
             </div>
             <div class="row txtUpload">
               <div class="col-md-12">
-                <mat-selection-list>
+                <mat-selection-list (selectionChange)="selectedChanged($event,'pendingDoc2')">
                   <div>
                     <span>
-                      <mat-list-option checkboxPosition="before" [selected]="false">
+                      <mat-list-option checkboxPosition="before" [selected]="pendingDocUpload[1]!='pendingDoc2'" (click)="open($event,mymodal1,'pendingDoc2')">
                         <p class="text-small mb-0 text-muted txtinfo">Upload picture of your driver's license.<br>
-                          <span class="timeSpan1 assignLable">Upload File</span>
+                          <span *ngIf="pendingDocUpload[1]!='pendingDoc2'" class="timeSpan1">Uploaded - {{pendingDocUpload[1]}}</span>
+                          <span *ngIf="pendingDocUpload[1]=='pendingDoc2'" class="timeSpan1 assignLable">Upload File</span>
                         </p>
                       </mat-list-option>
                     </span>
@@ -93,7 +97,7 @@
                   <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
                     (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
                     name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
-                    class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,i,j)">
+                    class="form-control rounded-0 border-0 py-4 bg-light editInput" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,i,j)">
                   
                   <div class="input-group-append" *ngIf="editusermsg !='' && data.isEdit == true">
                       <button (click)="EditMsgReply(edittitleInput, replyToMsg,i,j)" type="submit" class="btn btn-link"> 
@@ -141,7 +145,7 @@
                   <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
                     (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
                     name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
-                    class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,p,'ePost')">
+                    class="form-control rounded-0 border-0 py-4 bg-light editInput" (keydown.enter)="EditMsgReply(edittitleInput , replyToMsg,p,'ePost')">
                   
                     <div class="input-group-append" *ngIf="editusermsg !='' && data.isEdit == true">
                       <button (click)="EditMsgReply(edittitleInput , replyToMsg,p,'ePost')" type="submit" class="btn btn-link"> 
@@ -151,7 +155,7 @@
                         Cancel
                       </button>
                     </div>
-
+                  
                     <div *ngIf="data.length-1 == i">
                     <span class="edit"><a href="#"><i class="fa fa-pencil fa-lg"></i></a></span>
                   </div>
@@ -198,75 +202,116 @@
                   </a>
                 </div>
               </div>
+              <!--<div *ngIf="data.replyToMsg != ''" class="reply-cls replyToMsg rounded py-2 px-3 mb-2 row">
+                <p>{{data.replyToMsg.msg}}</p>
+              </div>-->
+              <div class="replyToMsg" *ngIf="data.replyToMsg != ''">
+                <div class="media w-100 mb-3">
+                  <div class="media-body ml-3 "> 
+                    <div class="bg-light rounded py-2  mb-2 px-3 msgTxt profile-pic">
+                      <div class="avatar-circle" fxShow="true" fxHide.lt-md>
+                        <span class="initials">{{getInitials(data.replyToMsg.FromName)}}</span>
+                      </div>
+                      <p class="small text-muted chat-msg-userneme txtdate">{{data.replyToMsg.FromName}} <span
+                        class="timeSpan">{{data.replyToMsg.time}} - {{data.replyToMsg.date}} </span> </p>
+                      <p class="text-small mb-0 text-muted txtinfo">{{data.replyToMsg.msg}}
+                      </p>
+                      <div class="editDiv1">
+                        <a class="editIcon1" (click)="removeReplymsg(data,p,'ePost')">
+                          <span class="material-icons">
+                            close
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="replyToMsg" *ngIf="data?.replyToMsgRemoved == true">
+              <div class="media w-100 mb-3">
+                <div class="media-body ml-3 "> 
+                  <div class="bg-light rounded py-2  mb-2 px-3 msgTxt profile-pic">
+                    <p class="text-small mb-0 text-muted txtinfo">You removed this message</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- attached file name start -->
-      <div *ngIf="attachedFileName!=null">
-        <div class="row rowAttachedFile" *ngFor="let filedt of attachedFileName;let f = index">
-          <div class="col-md-1 col-sm-1">
-            <div class="squareCls"></div>
-          </div>
-          <div class="col-md-9 col-sm-9">
-            <span class="docName">Document name:</span><span *ngIf="fileNameEdit[f]==null">{{filedt?.name}}</span>
-            <span class="material-icons downloadIcon editFileIcon" (click)="editFileName(filedt,f)"
-              *ngIf="fileNameEdit[f]==null">
-              create
-            </span>
-            <input type="text" [(ngModel)]="fileNameEdit[f]" *ngIf="fileNameEdit[f]!=null"
-              class="form-control inputFileName" />
-          </div>
-          <div class="col-md-1 col-sm-1 saveCls ">
-            <a *ngIf="fileNameEdit[f]!=null" class="saveFileName"
-              (click)="saveFileName(filedt,fileNameEdit[f],f)">Save</a>
-
-          </div>
-          <div class="col-md-1 col-sm-1  assignCls">
-            <!-- <a (click)="assignAttachmentClick(filedt,'assign',f)" *ngIf="AssignInfo[f]!='Assigned'">
-              <span class="assignLable">Assign</span>
-            </a> -->
-
-            <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu" *ngIf="AssignInfo[f]!='Assigned'" >Assign</button>
-            <mat-menu #menu="matMenu" >
-           <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked"  (click)="assignAttachmentClick(filedt,'assign',f)" >{{item.name}}</button>
-            </mat-menu>
-            <span class="assignLable" *ngIf="AssignInfo[f]=='Assigned'"
-              (click)="assignAttachmentClick(filedt,'removeAssign',f)">Assigned</span>
-            <a *ngIf="fileNameEdit[f]!=null" class="saveFileName clearBtn" (click)="clearAttachedFile(filedt,f)">
-              <span class="material-icons">clear</span></a>
-          </div>
-        </div>
-      </div>
-      <!-- attached file name end -->
     </div>
-    <div class="card">
-
-      <div class="col-md-12 example-card input-group" *ngIf="replyToMsg != ''">
-        <a class="user-msg" pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="myEasing"
-          [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#{{replyToMsg.Id}}">
-          {{replyToMsg.msg}}</a>
-      </div>
-      <div class="input-group" id="btn-input">
-        <div class="input-group-append">
-          <button id="button-addon2" (click)="open(mymodal)" type="button" class="btn btn-link text-small">
-            <mat-icon>attach_file</mat-icon>
-          </button>
+  </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="px-4 py-5 chat-message" >
+      <div class="card" style="bottom: 0px; ">
+        <div class="col-md-12 example-card input-group" *ngIf="replyToMsg != ''">
+          <a class="user-msg" pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="myEasing"
+            [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#{{replyToMsg.Id}}">
+            {{replyToMsg.msg}}</a>
         </div>
-        <!-- <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept=".pdf,.doc,.txt" style="display:none;" (change)="fileEvent($event)" /> -->
-        <input [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
-          (input)="jsonArray[2].msg=$event.target.textContent" type="text" #titleInput [(ngModel)]='usermsg'
-          name="usermsg" placeholder="Type a message" aria-describedby="button-addon2"
-          class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
-        <div class="input-group-append" *ngIf="replyToMsg != '' || usermsg !=''">
-          <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link">
-            <mat-icon>send</mat-icon>
-          </button>
+        <div class="input-group" id="btn-input">
+          <div class="input-group-append">
+            <button id="button-addon2" (click)="open($event,mymodal,'')" type="button" class="btn btn-link text-small">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+
+          <input [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
+            (input)="jsonArray[2].msg=$event.target.textContent" type="text" #titleInput [(ngModel)]='usermsg'
+            name="usermsg" placeholder="Type a message" aria-describedby="button-addon2"
+            class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
+          <div class="input-group-append" *ngIf="replyToMsg != '' || usermsg !=''">
+            <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link">
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="attachedFileName!=null"  >
+          <div [ngClass]="{'view': attachedFileName.length != 0 }">
+          <div  *ngFor="let filedt of attachedFileName;let f = index">
+            <div class="row rowAttachedFile " style="position: relative;">
+            <div class="col-md-1 col-sm-1">
+              <div class="squareCls"></div>
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <span class="docName">Document name:</span><span *ngIf="fileNameEdit[f]==null">{{filedt?.name}}</span>
+              <span class="material-icons downloadIcon editFileIcon" (click)="editFileName(filedt,f)"
+                *ngIf="fileNameEdit[f]==null">
+                create
+              </span>
+              <div class="input-group" id="btn-input">
+                <input type="text" [(ngModel)]="fileNameEdit[f]" *ngIf="fileNameEdit[f]!=null"
+                  class="form-control inputFileName" />
+                
+                  <div class="input-group-append" >
+                    <button id="button-addon2" class="menu_cls" style="font-size: small;"  (click)="saveFileName(filedt,fileNameEdit[f],f)" type="submit" class="btn btn-link">
+                      <a *ngIf="fileNameEdit[f]!=null" class="saveFileName menu_cls">Save</a>
+                    </button>
+                  </div>
+             </div>
+            </div>
+            <div class="col-md-1 col-sm-1  assignCls">    
+              <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu" *ngIf="AssignInfo[f]!='Assigned'" >Assign</button>
+
+              <mat-menu #menu="matMenu" >
+             <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked"  (click)="assignAttachmentClick(filedt,'assign',f)" >{{item.name}}</button>
+              </mat-menu>
+              <span class="assignLable" *ngIf="AssignInfo[f]=='Assigned'"
+                (click)="assignAttachmentClick(filedt,'removeAssign',f)">Assigned</span>
+            </div>
+            <button class="btn primary menu_cls clsUploadbtn closeattachement" (click)="removeAssign(f)" *ngIf="AssignInfo[f]!='Assigned'" >
+              <img src="../../../assets/images/close-icon-29.png" style="width: 20px;height: 20px;">
+            </button> 
+          </div>
+
+          </div>
+        </div>
         </div>
       </div>
-    </div>
-
+     </div>
+    </mat-card-footer>
     <ng-template #mymodal let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
@@ -277,25 +322,69 @@
       <div class="modal-body">
         <div>
           <div>
-          <label style="margin-top: 10px;">File </label>
+          <label>File </label>
           <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
             <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,.ppt,.pptx" multiple (change)="uploadFile($event.target.files)">
           </div>
         </div>
-          <!-- <input  type="file"  #fileInput  class="form-control" (change)="fileNameData(fileInput)" />  -->
         </div>
-        <div  class="files-list" *ngFor="let file of files;let i= index">
-          <p> {{ file }} </p>
-          <button class="delete-file" (click)="deleteAttachment(i)">
-            <img src="../../../assets/images/Recycle_Bin_Full.png">
+        <div  class="files-list" *ngFor="let file of attachedFileName;let i= index"> 
+              <div class="input-group" id="btn-input">
+                <p *ngIf="fileNameEdit[i]==null"> {{ file?.name }} </p>
+                <input type="text" [(ngModel)]="fileNameEdit[i]" *ngIf="fileNameEdit[i]!=null"
+                  class="form-control inputFileName" />
+                
+                  <div class="input-group-append" >
+                    <button id="button-addon2" class="menu_cls" style="font-size: small;"  (click)="saveFileName(file,fileNameEdit[i],i)" type="submit" class="btn btn-link">
+                      <a *ngIf="fileNameEdit[i]!=null" class="saveFileName menu_cls">Save</a>
+                    </button>
+                  </div>
+             </div>
+           <button class="delete-file" *ngIf="fileNameEdit[i]==null">
+            <img src="../../../assets/images/edit.png" (click)="editFileName(file,i)">
+          </button>
+          <button class="delete-file" >
+            <img src="../../../assets/images/Recycle_Bin_Full.png" (click)="deleteAttachment(i)">
           </button>
        </div>
       </div>
       <div class="modal-footer">
-        <button type="button"  class="btn btn-success" (click)="modal.close('Save click')">Ok</button>
-        <button type="button" class="btn btn-danger" (click)="ModelClose(mymodal)">Cancel</button>
+        <button type="button" class="btn btn-danger actionBtn" (click)="ModelClose(mymodal)">Cancel</button>
+        <button type="button"  class="btn btn-success actionBtn" (click)="modal.close('Save click')">Ok</button>
       </div>
     </ng-template>
-
+    <ng-template #mymodal1 let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Upload file</h4>
+        <button type="button" class="close" aria-label="Close" (click)="ModelClose(mymodal1)">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+          <label >File</label>
+          <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFilePending($event)">
+            <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,.ppt,.pptx,image,.jpg,.png" multiple (change)="uploadFilePending($event.target.files)">
+          </div>
+        </div>
+          <!-- <input  type="file"  #fileInput  class="form-control" (change)="fileNameData(fileInput)" />  -->
+        </div>
+        
+        <div *ngFor="let file of pendingDocUpload;let i= index">
+          <div *ngIf="pendingDocUpload[i]!='pendingDoc1' && pendingDocUpload[i]!='pendingDoc2'" class="files-list">
+            <p> {{ file }} </p>
+            <button class="delete-file" (click)="deleteAttachmentPending(i)">
+              <img src="../../../assets/images/Recycle_Bin_Full.png">
+            </button>
+          </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger actionBtn" (click)="ModelClose(mymodal1)">Cancel</button>
+        <button type="button"  class="btn btn-success actionBtn" (click)="modal.close('Save click')">Ok</button>
+      </div>
+    </ng-template>
+  </mat-card>
     </div>
 </div>

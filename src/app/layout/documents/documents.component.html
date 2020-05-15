@@ -80,7 +80,7 @@
                   <div>
                   <label style="margin-top: 10px;">File </label>
                   <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-                    <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls" (change)="uploadFile($event.target.files)">
+                    <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,image,.jpg,.png" (change)="uploadFile($event.target.files)">
                   </div>
                 </div>
                   <!-- <input  type="file"  #fileInput  class="form-control" (change)="fileNameData(fileInput)" />  -->
@@ -93,8 +93,8 @@
                </div>
               </div>
               <div class="modal-footer">
-                <button type="button"  class="btn btn-success" (click)="onFileSelect(fileInput,textInput);modal.close('Save click')">Ok</button>
-                <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Cancel</button>
+                <button type="button" class="btn btn-danger actionBtn" (click)="modal.close('Save click')">CANCEL</button>
+                <button type="button"  class="btn btn-success actionBtn" (click)="onFileSelect(fileInput,textInput);modal.close('Save click')">OK</button>
               </div>
             </ng-template>
               </div>

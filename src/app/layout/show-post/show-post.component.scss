@@ -5,10 +5,49 @@
 .example-card {
     background-color: #cecece;
 }
+//new 
+.chat-message{
+    position: absolute;
+        width: 100%;
+        z-index: 99999;
+        bottom: 0;
+        padding: 0 !important;
+        height: auto;
+        left: 0;
+    }
+        .chat-box {
+        overflow-y: scroll;
+        padding-bottom: 150px !important;
+        padding-top: 0 !important;
+        height: 100vh;
+    }
+    .parent
+    {
+        padding-top: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
+        position: relative;
+        height: calc(100vh - 75px);
+        overflow-y: hidden;
+    }
+    
+    .view
+    {
+        height: 15vh;
+        overflow-y: scroll;
+        
+    }
 
-.Card-div {
-    width: 80%;
-}
+    .closeattachement{
+        font-size: smaller;
+        top: -10px;
+        right: -10px;
+        background: white;
+        position: absolute;
+        padding: 0px 0px 0px 0px;
+        margin: 0px;
+    }
+
 .file-button {
     padding-left: 20px;
     margin: 0;
@@ -16,11 +55,6 @@
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-}
-
-.upload-button {
-    float: right;
-    margin-right: 20px;
 }
 
 .panel .slidedown .glyphicon,
@@ -31,11 +65,6 @@
 .panel-body {
     overflow-y: scroll;
     height: 250px;
-}
-
-.upload-complete {
-    background: green;
-    color: #ffffff;
 }
 .user-msg {
     cursor: pointer;
@@ -120,10 +149,6 @@ body {
     align-items: center;
 }
 
-.rounded-lg {
-    border-radius: 0.5rem;
-}
-
 input::placeholder {
     font-size: 0.9rem;
     color: #999;
@@ -194,7 +219,6 @@ input::placeholder {
     color: #fff;
     font-family: "Courier New", monospace;
     font-weight: bold;
-    //top: 5px;
     padding: 10px;
 }
 
@@ -218,7 +242,7 @@ input::placeholder {
     margin-bottom: 2px;
 }
 .editDiv {
-
+    cursor: pointer;
     text-align: right;
     position: absolute;
     right: 7px;
@@ -229,10 +253,41 @@ input::placeholder {
 }
 .reply-cls:hover {
     .editDiv {
-
         .editIcon {
             display: flex;
         }
+    }
+}
+.replyToMsg {
+    .editDiv1 {
+        cursor: pointer;
+        text-align: right;
+        position: absolute;
+        right: 7px;
+        top: 5px;
+        .editIcon1 {
+            display: none;
+        }
+    }
+}
+.replyToMsg:hover{
+    .editDiv1 {
+        .editIcon1 {
+            display: flex;
+        }
+    }
+}
+.editInput{
+    background-color: #ffffff !important;
+}
+.replyToMsg {
+    .profile-pic {
+        margin: 0;
+    }
+    .avatar-circle {
+        float: left;
+        margin-right: 15px;
+        margin-top: 2px;
     }
 }
 @media screen and (max-width: 575px) {
@@ -286,6 +341,7 @@ input::placeholder {
     .editFileIcon {
         font-size: 10px;
         margin-left: 1%;
+        cursor: pointer;
     }
     .inputFileName {
         font-size: 11px;
@@ -314,6 +370,10 @@ input::placeholder {
     justify-content: right!important;
     float: right;
     margin-right: 1%;
+}
+.menu_cls
+{
+    font-size: inherit;
 }
 }
 
@@ -344,7 +404,7 @@ input::placeholder {
 .downloadIcon {
     color: grey !important;
 }
-.editIcon {
+.editIcon,.editIcon1 {
     color: grey !important;
     display: flex;
 }
@@ -352,10 +412,11 @@ input::placeholder {
     margin-left: 3%;
     margin-right: 2%;
     margin-bottom: 1%;
-    margin-top: 1%;
+    margin-top: 2%;
     padding-top: 1%;
     padding-bottom: 1%;
     border: 1px solid #ccc8c8;
+    background: #f5f6f8;
 }
 .squareCls {
     height: 50px;
@@ -389,6 +450,7 @@ input::placeholder {
 }
 .editFileIcon {
     margin-left: 1%;
+    cursor: pointer;
 }
 
 .txtUpload{
@@ -404,15 +466,14 @@ input::placeholder {
 }
 
 //test files 
-
 .uploadfilecontainer {
     background-image: url("../../../assets/images/cloud-2044823_960_720.png");
     background-repeat: no-repeat;
-    background-size: 100px;
+    background-size: 80px;
     background-position: center;
-    height: 200px;
+    height: 120px;
     width: 80%;
-    margin: 20px auto;
+    margin: 10px auto;
     border: 2px dashed #1C8ADB;
     border-radius: 10px;
 }
@@ -442,5 +503,13 @@ input::placeholder {
 }
 
 .files-list .delete-file img {
-    width: 30px;
+    width: 20px;
+}
+
+.actionBtn {
+    width: 20%;
+}
+button.btn.btn-danger.actionBtn {
+    background: #bdafaf;
+    border-color: #bdafaf;
 }

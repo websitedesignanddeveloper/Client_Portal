@@ -163,3 +163,21 @@ my-select mat-select {
 .colorWhite{
     color:#ffffff;
 }
+::ng-deep .mat-ink-bar {
+    background-color:#fff !important;
+}
+.mat-tab-label {
+    opacity: 1 !important;
+}
+.mat-tab-label-active {
+    opacity: 1 !important;
+}
+::ng-deep.mat-tab-label.mat-tab-label-active:not(.mat-tab-disabled),
+::ng-deep.mat-tab-label.mat-tab-label-active.cdk-keyboard-focused:not(.mat-tab-disabled) {
+  opacity: 1;
+}
+
+.case-nav-block {
+    background: #306bbb;
+    border: none;
+}

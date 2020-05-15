@@ -8,21 +8,21 @@
                 <span class="fill-remaining-space text-center">User Profile</span>
               </div>
               
-            <mat-form-field appearance="outline" class="form-element">
-              <mat-label>Email Address</mat-label>
-              <input matInput placeholder="Email Address" formControlName="email">
-              <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
-                {{ getErrorEmail() }}
-              </mat-error>
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="form-element">
+                <mat-label>Email Address</mat-label>
+                <input matInput placeholder="Email Address" formControlName="email">
+                <mat-error *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].touched">
+                  {{ getErrorEmail() }}
+                </mat-error>
+              </mat-form-field>
           
-            <mat-form-field appearance="outline" class="form-element">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Name" formControlName="name" readonly>
-              <mat-error *ngIf="!name.valid && name.touched">
-                {{ titleAlert }}
-              </mat-error>
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="form-element">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" readonly>
+                <mat-error *ngIf="!name.valid && name.touched">
+                  {{ titleAlert }}
+                </mat-error>
+              </mat-form-field> 
            
             <mat-form-field appearance="outline" class="form-element">
               <mat-label>Address</mat-label>
