@@ -17,7 +17,7 @@
     }
         .chat-box {
         overflow-y: scroll;
-        /*padding-bottom: 150px !important;*/
+        padding-bottom: 150px !important;
         padding-top: 0 !important;
         height: 100vh;
     }
@@ -37,11 +37,6 @@
         overflow-y: scroll;
         
     }
-
-    .footer_cls{
-        position: static;
-    }
-
 
     .closeattachement{
         font-size: smaller;
@@ -144,7 +139,7 @@ body {
 
 .messages-box,
 .chat-box {
-    height:80vh;
+    height: 68vh;
     overflow-y: scroll;
 }
 
@@ -225,7 +220,6 @@ input::placeholder {
     font-family: "Courier New", monospace;
     font-weight: bold;
     padding: 10px;
-    top: 4px;
 }
 
 .bg-light {
@@ -359,7 +353,7 @@ input::placeholder {
     }
     .messages-box,
 .chat-box {
-     height: 75vh;
+     height: 70vh;
     overflow-y: scroll;
 }
 .timeSpan1 {
@@ -512,40 +506,10 @@ input::placeholder {
     width: 20px;
 }
 
-// .actionBtn {
-//     width: 20%;
-// }
+.actionBtn {
+    width: 20%;
+}
 button.btn.btn-danger.actionBtn {
     background: #bdafaf;
     border-color: #bdafaf;
-}
-@-moz-document url-prefix() {
-    .msgContainer {
-        margin-bottom: 50px;
-    }
-}
-/*@media screen and (min-width:0) and (min-resolution: +72dpi) { 
-    .msgContainer {
-        //margin-bottom: 50px;
-    }
- }*/
- _:-ms-lang(x), .msgContainer {
-    margin-bottom: 50px;
-}
-_:-ms-lang(x), .parentContaoner{
-    overflow-x: hidden;
-}
-
-.fileNameEditBtn{
-    border: none;
-    box-shadow: none;
-}
-
-.wrapText{
-    min-width: 200px;
-    word-wrap: break-word;
-}
-.MsgwrapText{
-    width: 150px; 
-    word-wrap: break-word;
 }

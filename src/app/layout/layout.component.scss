@@ -181,3 +181,15 @@ my-select mat-select {
     background: #306bbb;
     border: none;
 }
+@supports (-webkit-hyphens:none)
+{
+    .account_circle {
+        font-size: 32px;
+    }
+}
+    
+@media screen and (min-width:0) and (min-resolution: +72dpi) { 
+    .case-nav-block{
+        color: #fff;
+    }
+ }

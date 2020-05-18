@@ -50,3 +50,19 @@ span.notificationCount {
          float:none;
          margin-left: auto !important;
     }
+/*@media only screen and (-webkit-min-device-pixel-ratio: 1) {
+    .mat-icon-button button {
+        //top: -30px;
+    }
+}*/
+@supports (-webkit-hyphens:none)
+{
+    .mat-icon-button button {
+        top: -30px;
+    }
+    .keyboard_arrow_right{
+        top: -22px;
+        //right: 1px;
+        position: absolute;
+    }
+}

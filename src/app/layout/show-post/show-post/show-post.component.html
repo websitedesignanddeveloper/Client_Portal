@@ -1,5 +1,5 @@
 <div class="px-0">
-  <div class="col-12 parent parentContaoner" style="padding-top: 10px;padding-left: 0px;padding-right: 0px;">
+  <div class="col-12 parent" style="padding-top: 10px;padding-left: 0px;padding-right: 0px;">
     <mat-card style="padding: 0px;">
       <mat-card-content>
     <div class="px-4 py-5 chat-box bg-white" #scrollMe>
@@ -77,7 +77,7 @@
         </div>
         <!-- Reciever Message-->
 
-        <div class="msgContainer" *ngIf="data1.reply != undefind || data1.reply != null">
+        <div *ngIf="data1.reply != undefind || data1.reply != null">
           <div *ngFor="let data of data1.reply;let i =index;">
             <div class="media w-50 ml-auto mb-3">
               <div class="media-body">
@@ -93,7 +93,7 @@
                       </a>
                     </span>
                   </div>
-                  <p [ngClass]="{'MsgwrapText': _isNotMobile != true }" *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}} </p>
+                  <p *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}} </p>
                   <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
                     (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
                     name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <div class="msgContainer" *ngIf="(posts.length != 0 || posts != null)  ">
+      <div *ngIf="(posts.length != 0 || posts != null)  ">
         <div *ngFor="let data of posts;let p = index">
           <div class="media w-50 ml-auto mb-3" *ngIf="data.case == selectedcase">
             <div class="media-body">
@@ -141,7 +141,7 @@
               <div class="reply-cls rounded py-2 px-3 mb-2 row">
                 <div class="row  col-md-12">
                   {{ item }}
-                  <p [ngClass]="{'MsgwrapText': _isNotMobile != true }" *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}}</p>
+                  <p *ngIf="data.isEdit != true" class="text-small mb-0 text-muted txtinfo">{{data.reply}}</p>
                   <input *ngIf="data.isEdit == true" [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
                     (input)="jsonArray[2].msg=$event.target.textContent" type="text" #edittitleInput [(ngModel)]='editusermsg'
                     name="editusermsg" placeholder="Type a message" aria-describedby="button-addon2"
@@ -167,7 +167,7 @@
                       </a></span>
                   </div>
 
-                  <p [ngClass]="{'MsgwrapText': _isNotMobile != true }" class="text-small mt20 text-muted ">{{dataurl.url}}</p>
+                  <p class="text-small mt20 text-muted">{{dataurl.url}}</p>
                   
                   <div class="mt20" *ngIf="dataurl.url != undefind || dataurl.url != null">
                     <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{dataurl.url}}" download>
@@ -184,7 +184,7 @@
                       </a></span>
                   </div>
 
-                  <p [ngClass]="{'MsgwrapText': _isNotMobile != true }" class="text-small mt20 text-muted ">{{dataurlNotAssign.urlNotAssign}}</p>
+                  <p class="text-small mt20 text-muted">{{dataurlNotAssign.urlNotAssign}}</p>
                   <div class="mt20" *ngIf="dataurlNotAssign.urlNotAssign != undefind || dataurlNotAssign.urlNotAssign != null">
                     <span fxShow="true" fxHide.lt-md class="col-md-1"><a href="{{dataurlNotAssign.urlNotAssign}}" download>
                         <span class="material-icons downloadIcon">
@@ -212,9 +212,9 @@
                       <div class="avatar-circle" fxShow="true" fxHide.lt-md>
                         <span class="initials">{{getInitials(data.replyToMsg.FromName)}}</span>
                       </div>
-                      <p class="small text-muted chat-msg-userneme txtdate">{{data.replyToMsg.FromName}}<span
+                      <p class="small text-muted chat-msg-userneme txtdate">{{data.replyToMsg.FromName}} <span
                         class="timeSpan">{{data.replyToMsg.time}} - {{data.replyToMsg.date}} </span> </p>
-                      <p [ngClass]="{'MsgwrapText': _isNotMobile != true }" class="text-small mb-0 text-muted txtinfo">{{data.replyToMsg.msg}}
+                      <p class="text-small mb-0 text-muted txtinfo">{{data.replyToMsg.msg}}
                       </p>
                       <div class="editDiv1">
                         <a class="editIcon1" (click)="removeReplymsg(data,p,'ePost')">
@@ -243,7 +243,7 @@
     </div>
   </div>
   </mat-card-content>
-  <mat-card-footer class="footer_cls">
+  <mat-card-footer>
     <div class="px-4 py-5 chat-message" >
       <div class="card" style="bottom: 0px; ">
         <div class="col-md-12 example-card input-group" *ngIf="replyToMsg != ''">
@@ -261,7 +261,7 @@
           <input [contentEditable]="underUpdateTagId==jsonArray[2].Id" [textContent]="jsonArray[2].msg"
             (input)="jsonArray[2].msg=$event.target.textContent" type="text" #titleInput [(ngModel)]='usermsg'
             name="usermsg" placeholder="Type a message" aria-describedby="button-addon2"
-            class="form-control rounded-0 border-0 py-4 bg-light titleInput" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
+            class="form-control rounded-0 border-0 py-4 bg-light" (keydown.enter)="MsgReply(titleInput , replyToMsg)">
           <div class="input-group-append" *ngIf="replyToMsg != '' || usermsg !=''">
             <button id="button-addon2"  (click)="MsgReply(titleInput , replyToMsg)" type="submit" class="btn btn-link">
               <mat-icon>send</mat-icon>
@@ -286,14 +286,14 @@
                   class="form-control inputFileName" />
                 
                   <div class="input-group-append" >
-                    <button id="button-addon2" style="font-size: small;" (click)="saveFileName(filedt,fileNameEdit[f],f)" type="submit" class="btn btn-link fileNameEditBtn">
+                    <button id="button-addon2" class="menu_cls" style="font-size: small;"  (click)="saveFileName(filedt,fileNameEdit[f],f)" type="submit" class="btn btn-link">
                       <a *ngIf="fileNameEdit[f]!=null" class="saveFileName menu_cls">Save</a>
                     </button>
                   </div>
              </div>
             </div>
-            <div class="col-md-1 col-sm-1  assignCls">
-              <button class="btn primary menu_cls clsUploadbtn" [matMenuTriggerFor]="menu" *ngIf="AssignInfo[f]!='Assigned'" >Assign</button>
+            <div class="col-md-1 col-sm-1  assignCls">    
+              <button class="btn primary menu_cls clsUploadbtn"  [matMenuTriggerFor]="menu" *ngIf="AssignInfo[f]!='Assigned'" >Assign</button>
 
               <mat-menu #menu="matMenu" >
              <button mat-menu-item *ngFor="let item of items;let m = index" [selected]="item.checked"  (click)="assignAttachmentClick(filedt,'assign',f)" >{{item.name}}</button>
@@ -324,18 +324,18 @@
           <div>
           <label>File </label>
           <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-            <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,.ppt,.pptx,image,.jpg,.png" multiple (change)="uploadFile($event.target.files)">
+            <input hidden type="file" #fileInput accept=".pdf,.doc,.txt,.xlsx,.xls,.ppt,.pptx" multiple (change)="uploadFile($event.target.files)">
           </div>
         </div>
         </div>
         <div  class="files-list" *ngFor="let file of attachedFileName;let i= index"> 
               <div class="input-group" id="btn-input">
-                <p class="wrapText" *ngIf="fileNameEdit[i]==null"> {{ file?.name }} </p>
+                <p *ngIf="fileNameEdit[i]==null"> {{ file?.name }} </p>
                 <input type="text" [(ngModel)]="fileNameEdit[i]" *ngIf="fileNameEdit[i]!=null"
                   class="form-control inputFileName" />
                 
                   <div class="input-group-append" >
-                    <button id="button-addon2" style="font-size: small;"  (click)="saveFileName(file,fileNameEdit[i],i)" type="submit" class="btn btn-link fileNameEditBtn">
+                    <button id="button-addon2" class="menu_cls" style="font-size: small;"  (click)="saveFileName(file,fileNameEdit[i],i)" type="submit" class="btn btn-link">
                       <a *ngIf="fileNameEdit[i]!=null" class="saveFileName menu_cls">Save</a>
                     </button>
                   </div>
@@ -373,7 +373,7 @@
         
         <div *ngFor="let file of pendingDocUpload;let i= index">
           <div *ngIf="pendingDocUpload[i]!='pendingDoc1' && pendingDocUpload[i]!='pendingDoc2'" class="files-list">
-            <p class="wrapText"> {{ file }} </p>
+            <p> {{ file }} </p>
             <button class="delete-file" (click)="deleteAttachmentPending(i)">
               <img src="../../../assets/images/Recycle_Bin_Full.png">
             </button>

@@ -39,7 +39,6 @@ export class ShowPostComponent implements OnInit {
   selected_index = 0;
   public fullName: string = "";
   public isEdit: boolean = false;
-  public isFocus: boolean = false;
   public editArrayData: any = [];
   public isEditPost:boolean=false;
   public attachedFileName:any=[];
@@ -167,7 +166,6 @@ export class ShowPostComponent implements OnInit {
       this.posts.push(filedetails);
       if (file.length == 0 || file == null) {
         var fileurl = null;
-        setTimeout(()=>{this.scrollToBottom();},100);
       }
       else {
         //
@@ -187,7 +185,6 @@ export class ShowPostComponent implements OnInit {
           this.usermsg = '';
           this.replyToMsg = '';
           this.files = [];
-          setTimeout(()=>{this.scrollToBottom();},100);
         }
         else{
            //not assigned 
@@ -200,13 +197,13 @@ export class ShowPostComponent implements OnInit {
            this.usermsg = '';
            this.replyToMsg = '';
            this.files = [];
-           setTimeout(()=>{this.scrollToBottom();},100);
         }
       }
       }
       console.log('this.posts==>'+JSON.stringify(this.posts));
       this.usermsg = '';
       this.replyToMsg = '';
+      setTimeout(()=>{this.scrollToBottom();},100);
     }
     else {
       //edit code
